@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inheritance</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.1.9/p5.min.js" integrity="sha512-WIklPM6qPCIp6d3fSSr90j+1unQHUOoWDS4sdTiR8gxUTnyZ8S2Mr8e10sKKJ/bhJgpAa/qG068RDkg6fIlNFA==" crossorigin="anonymous"></script>
+</head>
+<body>
+
+
+<script>
+    let ball;
+    let squere;
+  function setup(){
+      createCanvas(400,400)
+      ball=new Circle(100,200,100)
+      let pos=random(width)
+      squere=new Squere(300,pos,30)
+  }
+  function draw(){
+  background(200)
+  ball.drawCircle()
+  ball.update()
+  squere.drawCircle()
+  squere.update()
+  }
+
+
+//this is a circle class
+class Circle{
+    constructor(x,y,r){
+        this.x=x
+        this.y=y
+        this.r=r
+        this.color=0;
+    }
+    
+   drawCircle(){
+       fill(this.color)
+       noStroke()       
+       circle(this.x,this.y,this.r)
+   }
+   update(){
+       if(this.color<255){
+           this.color+=2
+        //    console.log(this.color);
+     }else{
+         this.color=0
+     }
+
+   }
+}
+
+//inhariting the circle class
+class Squere extends Circle{
+    constructor(x,y,r){
+      super(x,y,r)
+    }
+    drawCircle(){
+        // rotate(40)
+        rect(this.x,this.y,this.r,30)
+    }
+    update(){
+        // rotate(30)
+        super.update()
+        this.r+=random(2,10)
+        
+    }
+}
+
+
+
+</script>
+</body>
+</html>
